@@ -8,7 +8,8 @@ from risklab_scoring import (
     COLUNAS, carregar_artefato, fatores_de_risco, pontuar_cliente, pontuar_lote,  # noqa: F401
 )
 
-st.set_page_config(page_title="RiskLab", page_icon="📊", layout="wide")
+st.set_page_config(page_title="RiskLab", page_icon="📊", layout="wide",
+                   menu_items={"Get help": None, "Report a bug": None, "About": None})
 
 COR_FAIXA = {
     "Baixo": "#2F7D62",
@@ -43,16 +44,12 @@ html, body, .stApp, .stApp p, .stApp label, .stApp input, .stApp button,
 
 /* Barra superior (Fork, GitHub etc.): fundo sólido para o conteúdo não passar por baixo,
    e ícones totalmente opacos */
-[data-testid="stHeader"] { background: var(--bg); border-bottom: 1px solid var(--line); }
-[data-testid="stToolbar"], [data-testid="stToolbarActions"] { opacity: 1 !important; }
-[data-testid="stToolbar"] a, [data-testid="stToolbar"] button,
+header, [data-testid="stHeader"] { background: #F3F5F7 !important; border-bottom: 1px solid #DDE3E8; }
+header *, [data-testid="stToolbar"] *, [data-testid="stToolbarActions"] * { opacity: 1 !important; }
+header a, header button, header span, header p, header svg,
+[data-testid="stToolbar"] a, [data-testid="stToolbar"] button, [data-testid="stToolbar"] svg,
 [data-testid="stToolbarActions"] a, [data-testid="stToolbarActions"] button,
-[data-testid="stToolbar"] span, [data-testid="stToolbarActions"] span {
-  color: var(--ink) !important; opacity: 1 !important;
-}
-[data-testid="stToolbar"] svg, [data-testid="stToolbarActions"] svg {
-  color: var(--ink) !important; fill: currentColor !important; opacity: 1 !important;
-}
+[data-testid="stToolbarActions"] svg { color: #15212B !important; fill: currentColor !important; }
 .block-container { max-width: 1240px; padding-top: 1.6rem; padding-bottom: 4rem; }
 
 /* Cabeçalho */
@@ -65,12 +62,13 @@ html, body, .stApp, .stApp p, .stApp label, .stApp input, .stApp button,
 
 /* Abas */
 .stTabs [data-baseweb="tab-list"] { gap: 28px; border-bottom: 1px solid var(--line); }
-.stTabs [data-baseweb="tab"] { padding: 10px 0; height: auto; font-weight: 500; }
-.stTabs [data-baseweb="tab"], .stTabs [data-baseweb="tab"] p,
-.stTabs [data-baseweb="tab"] div, .stTabs [data-baseweb="tab"] span { color: var(--muted) !important; opacity: 1 !important; }
-.stTabs [data-baseweb="tab"]:hover, .stTabs [data-baseweb="tab"]:hover p { color: var(--ink) !important; }
-.stTabs [aria-selected="true"], .stTabs [aria-selected="true"] p,
-.stTabs [aria-selected="true"] div { color: var(--accent) !important; font-weight: 600; }
+[role="tablist"] [role="tab"] { padding: 10px 0; height: auto; font-weight: 500; }
+[role="tablist"] [role="tab"],
+[role="tablist"] [role="tab"] * { color: #4A5863 !important; opacity: 1 !important; }
+[role="tablist"] [role="tab"]:hover,
+[role="tablist"] [role="tab"]:hover * { color: #15212B !important; }
+[role="tablist"] [role="tab"][aria-selected="true"],
+[role="tablist"] [role="tab"][aria-selected="true"] * { color: #0E5A66 !important; font-weight: 600; }
 .stTabs [data-baseweb="tab-highlight"] { background: var(--accent); height: 2px; }
 
 /* Títulos de seção */
@@ -166,11 +164,13 @@ html, body, .stApp, .stApp p, .stApp label, .stApp input, .stApp button,
 """
 st.markdown(CSS, unsafe_allow_html=True)
 
+# Mude para True para esconder por completo a barra superior (Fork, GitHub, menu).
 ESCONDER_BARRA_SUPERIOR = False
 if ESCONDER_BARRA_SUPERIOR:
     st.markdown(
-        "<style>[data-testid='stToolbar'], [data-testid='stToolbarActions'], "
-        "[data-testid='stHeader'] { display: none !important; }</style>",
+        "<style>header, [data-testid='stHeader'], [data-testid='stToolbar'], "
+        "[data-testid='stToolbarActions'], [data-testid='stAppDeployButton'], "
+        ".stAppDeployButton, .viewerBadge_container__r5tak { display: none !important; }</style>",
         unsafe_allow_html=True,
     )
 
@@ -249,7 +249,7 @@ try:
 except FileNotFoundError:
     st.error("Arquivo `risklab_modelo.joblib` não encontrado. Execute o notebook até o final para gerá-lo.")
     st.stop()
-
+    
 html(
     '<div class="rl-head"><div class="rl-mark">',
     '<svg width="22" height="22" viewBox="0 0 22 22" fill="none">',
@@ -263,6 +263,7 @@ html(
 st.write("")
 
 aba_individual, aba_modelo = st.tabs(["Consulta individual", "Sobre o modelo"])
+
 
 with aba_individual:
     st.write("")
