@@ -277,17 +277,17 @@ with aba_individual:
             renda = None
             if not sem_renda:
                 renda = st.number_input("Renda mensal (R$)", min_value=1.0, max_value=1_000_000.0,
-                                        value=5000.0, step=100.0)
+                                        value=0.0, step=100.0)
             divida = st.number_input(
                 "Pagamentos mensais de dívidas (R$)", min_value=0.0, max_value=1_000_000.0,
-                value=1500.0, step=100.0,
+                value=0.0, step=100.0,
                 help="Soma mensal de parcelas, pensões e custos de vida. Com renda informada, "
                      "o modelo usa a razão dívida ÷ renda.")
             revolving = st.number_input(
                 "Utilização do crédito rotativo (% do limite)", min_value=0.0, max_value=300.0,
-                value=30.0, step=5.0,
+                value=0.0, step=5.0,
                 help="Quanto do limite de cartões e linhas sem garantia está em uso. 100% = limite totalmente usado.")
-            idade = st.number_input("Idade", min_value=18, max_value=110, value=40, step=1)
+            idade = st.number_input("Idade", min_value=18, max_value=110, value=0, step=1)
 
             html('<div class="rl-h">Histórico de atrasos (nº de vezes)</div>')
             c1, c2, c3 = st.columns(3)
@@ -297,8 +297,8 @@ with aba_individual:
 
             html('<div class="rl-h">Crédito e família</div>')
             c4, c5 = st.columns(2)
-            linhas = c4.number_input("Linhas de crédito abertas", min_value=0, max_value=60, value=6)
-            imoveis = c5.number_input("Empréstimos imobiliários", min_value=0, max_value=30, value=1)
+            linhas = c4.number_input("Linhas de crédito abertas", min_value=0, max_value=60, value=0)
+            imoveis = c5.number_input("Empréstimos imobiliários", min_value=0, max_value=30, value=0)
 
             c6, c7 = st.columns(2)
             deps = c6.number_input("Dependentes", min_value=0, max_value=15, value=0)
