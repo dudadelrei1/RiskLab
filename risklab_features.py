@@ -1,20 +1,3 @@
-"""
-risklab_features.py
--------------------
-Engenharia de atributos do RiskLab.
-
-Todas as transformações aqui são *stateless*: nada é aprendido dos dados
-(sem medianas, percentis ou médias calculados na base). Por isso podem ser
-aplicadas antes do split treino/teste sem vazamento de informação, e a
-mesma função serve para a interface que consulta clientes novos.
-
-Imputação de valores ausentes e padronização ficam dentro do Pipeline do
-scikit-learn, onde são aprendidas apenas com os dados de treino.
-
-Entrada: DataFrame com as colunas originais do "Give Me Some Credit"
-         (maiúsculas/minúsculas não importam; 'Unnamed: 0' e o alvo são ignorados).
-Saída:   DataFrame numérico com as colunas listadas em FEATURES.
-"""
 import numpy as np
 import pandas as pd
 
