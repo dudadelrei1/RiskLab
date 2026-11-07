@@ -276,7 +276,7 @@ with aba_individual:
         with st.form("form_cliente"):
             renda = None
             if not sem_renda:
-                renda = st.number_input("Renda mensal (R$)", min_value=1.0, max_value=1_000_000.0,
+                renda = st.number_input("Renda mensal (R$)", min_value=0.0, max_value=1_000_000.0,
                                         value=0.0, step=100.0)
             divida = st.number_input(
                 "Pagamentos mensais de dívidas (R$)", min_value=0.0, max_value=1_000_000.0,
