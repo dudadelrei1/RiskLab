@@ -1,11 +1,3 @@
-"""
-risklab_scoring.py
-------------------
-Lógica de consulta do RiskLab, separada da interface para poder ser testada
-e reutilizada (Streamlit, API, scripts).
-
-Requer risklab_modelo.joblib e risklab_features.py na mesma pasta.
-"""
 import joblib
 import numpy as np
 import pandas as pd
