@@ -287,7 +287,7 @@ with aba_individual:
                 "Utilização do crédito rotativo (% do limite)", min_value=0.0, max_value=300.0,
                 value=0.0, step=5.0,
                 help="Quanto do limite de cartões e linhas sem garantia está em uso. 100% = limite totalmente usado.")
-            idade = st.number_input("Idade", min_value=18, max_value=110, value=0, step=1)
+            idade = st.number_input("Idade", min_value=0, max_value=110, value=0, step=1)
 
             html('<div class="rl-h">Histórico de atrasos (nº de vezes)</div>')
             c1, c2, c3 = st.columns(3)
