@@ -230,7 +230,7 @@ def bloco_fatores(titulo, lista, cor, sinal):
         linhas = []
         for nome, v in lista:
             largura = max(6, abs(v) / maximo * 100)
-            valor = virgula(f"{sinal}{abs(v):.1f} p.p.")
+            valor = f"{sinal}{virgula(f'{abs(v):.1f}')} p.p."
             linhas.append(
                 '<div class="rl-frow"><div class="rl-fline">'
                 f'<span>{escape(str(nome))}</span><span class="rl-fval" style="color:{cor}">{valor}</span></div>'
